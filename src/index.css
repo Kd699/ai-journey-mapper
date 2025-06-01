@@ -1,0 +1,586 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom animations for the journey mapper */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  0%, 50% { border-color: transparent; }
+  51%, 100% { border-color: #3b82f6; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(-10px) rotateZ(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotateZ(720deg);
+    opacity: 0;
+  }
+}
+
+/* Utility classes */
+.animate-typewriter {
+  animation: typewriter 2s steps(40, end);
+  border-right: 2px solid #3b82f6;
+  animation: typewriter 2s steps(40, end), blink 1s infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s infinite;
+}
+
+.animate-confetti {
+  animation: confetti 3s linear infinite;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Button hover effects */
+.btn-hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Tree animation */
+.tree-branch {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.tree-branch:nth-child(1) { animation-delay: 0.1s; }
+.tree-branch:nth-child(2) { animation-delay: 0.2s; }
+.tree-branch:nth-child(3) { animation-delay: 0.3s; }
+.tree-branch:nth-child(4) { animation-delay: 0.4s; }
+.tree-branch:nth-child(5) { animation-delay: 0.5s; }
+
+/* Focus states for accessibility */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Custom button styles */
+.btn-primary {
+  @apply bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200;
+}
+
+.btn-secondary {
+  @apply bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 hover:border-gray-300 font-medium py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-200;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200;
+}
+
+/* Input styles */
+.input-field {
+  @apply w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+}
+
+/* Custom styles for beautiful UX */
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 backdrop-blur-sm;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center justify-center;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent;
+  }
+  
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  }
+  
+  .btn-hover-lift {
+    @apply transform hover:-translate-y-0.5 transition-transform duration-200;
+  }
+  
+  .tree-branch {
+    @apply relative before:absolute before:left-4 before:top-0 before:bottom-0 before:w-px before:bg-gradient-to-b before:from-blue-200 before:to-purple-200 before:opacity-50;
+  }
+  
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #CBD5E1 #F1F5F9;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gradient-to-b from-blue-400 to-purple-500 rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply from-blue-500 to-purple-600;
+  }
+}
+
+/* Mermaid Flowchart Styles */
+.mermaid-container {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mermaid-container .mermaid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mermaid-container svg {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: auto !important;
+  width: auto !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  overflow: visible !important;
+}
+
+/* Enhanced Mermaid node styling with better text handling */
+.mermaid-container .node > rect,
+.mermaid-container .node > circle,
+.mermaid-container .node > ellipse,
+.mermaid-container .node > polygon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+  stroke-width: 2px !important;
+}
+
+.mermaid-container .node:hover > rect,
+.mermaid-container .node:hover > circle,
+.mermaid-container .node:hover > ellipse,
+.mermaid-container .node:hover > polygon {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  transform: scale(1.02);
+}
+
+/* Better text styling for nodes */
+.mermaid-container .node text {
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  fill: #ffffff !important;
+  dominant-baseline: central !important;
+  text-anchor: middle !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+}
+
+/* Multi-line text support */
+.mermaid-container .node foreignObject {
+  overflow: visible !important;
+}
+
+.mermaid-container .node foreignObject div {
+  padding: 8px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+  word-wrap: break-word !important;
+  max-width: 200px !important;
+}
+
+/* Enhanced edge styling */
+.mermaid-container .edgePath path {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+  stroke-width: 2px !important;
+}
+
+.mermaid-container .edgePath:hover path {
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Interactive node effects */
+.mermaid-container .node {
+  cursor: pointer !important;
+}
+
+/* Edge label styling with better visibility */
+.mermaid-container .edgeLabel {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #374151 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.mermaid-container .edgeLabel foreignObject {
+  overflow: visible !important;
+}
+
+.mermaid-container .edgeLabel foreignObject div {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #374151 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  white-space: nowrap !important;
+}
+
+/* Fix for proper node sizing and text wrapping */
+.mermaid-container .nodeLabel {
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  fill: #ffffff !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mermaid-container svg {
+    font-size: 11px !important;
+  }
+  
+  .mermaid-container .node text {
+    font-size: 11px !important;
+  }
+  
+  .mermaid-container .node foreignObject div {
+    font-size: 11px !important;
+    padding: 6px !important;
+    max-width: 150px !important;
+  }
+  
+  .mermaid-container .edgeLabel {
+    font-size: 10px !important;
+    padding: 2px 6px !important;
+  }
+}
+
+/* Ensure proper container sizing */
+.mermaid-container > div {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Fix for SVG scaling issues */
+.mermaid-container svg#mermaid-svg {
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
+/* Beautiful animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes flowchartAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes nodeHighlight {
+  0% {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+  50% {
+    filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-confetti {
+  animation: confetti 3s ease-in forwards;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-flowchart-appear {
+  animation: flowchartAppear 0.8s ease-out forwards;
+}
+
+.animate-node-highlight {
+  animation: nodeHighlight 2s ease-in-out infinite;
+}
+
+/* Enhanced hover states */
+.card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Interactive flowchart enhancements */
+.mermaid-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.mermaid-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.02) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Mobile touch improvements */
+@media (hover: none) and (pointer: coarse) {
+  .btn-hover-lift:hover {
+    transform: none;
+  }
+  
+  .btn-hover-lift:active {
+    transform: scale(0.98);
+  }
+  
+  .mermaid-container .node:hover > rect,
+  .mermaid-container .node:hover > circle,
+  .mermaid-container .node:hover > ellipse,
+  .mermaid-container .node:hover > polygon {
+    transform: none;
+  }
+  
+  .mermaid-container .node:active > rect,
+  .mermaid-container .node:active > circle,
+  .mermaid-container .node:active > ellipse,
+  .mermaid-container .node:active > polygon {
+    transform: scale(0.98);
+  }
+}
+
+/* Loading states */
+.mermaid-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #6B7280;
+  font-size: 14px;
+}
+
+.mermaid-loading::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid #E5E7EB;
+  border-top: 2px solid #3B82F6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Dark mode support for Mermaid */
+@media (prefers-color-scheme: dark) {
+  .mermaid-container .edgeLabel {
+    background: rgba(31, 41, 55, 0.9);
+    color: #F9FAFB;
+  }
+}
